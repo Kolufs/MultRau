@@ -14,7 +14,7 @@ backupLimit=
 backupIntervalS=
 
 
-function backupLimitRoutine () {
+function backupLimit () {
     if [ $(ls -1 $backupFolder | wc -l) -gt $backupLimit ]; then
         oldestBackup=$(ls -tr $backupFolder | head -1)
         printf "LOG: Deleting oldest backup  $oldestBackup\n"
@@ -26,7 +26,7 @@ function doBackup () {
     currentDate=$(date +%m-%d_%H-%M)
     cp -r $saveFolder/$world $backupFolder/$currentDate
     printf "LOG: Backup done at $currentDate\n"
-    backupLimitRoutine
+    backupLimit
 }
 
 function setRamdisk () {
